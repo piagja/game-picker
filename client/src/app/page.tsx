@@ -7,9 +7,8 @@ import Image from 'next/image'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { useGameContext, Game } from './context/GameContext'
-import { fetchData } from './api/api'
 import { capitalize } from './helpers/capitalize'
-import { useGamesData } from './hooks/useGameData'
+import { allGames } from './api'
 
 const Home = () => {
   const { addGame, shuffleGames, games, setGames, removeGame } =
@@ -22,9 +21,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetcher = async () => {
-      const data = await fetchData()
-
-      setGameData(data.results)
+      console.log(allGames)
     }
 
     fetcher()
