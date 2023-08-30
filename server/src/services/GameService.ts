@@ -36,6 +36,7 @@ export class GameService {
       allGames = allGames.concat(games)
 
       offset += this.batchSize
+
       console.log(offset)
     }
 
@@ -45,19 +46,25 @@ export class GameService {
       }
     })
 
-    const gamesToSave = allGames.map((game: any) => {
-      if (existingGameIds.some(existingGame => existingGame.id === game.id)) {
-        return null
-      } else {
-        return {
-          id: game.id,
-          name: game.name,
-          cover: game.cover?.url || null,
-          slug: game.slug,
-          platforms: game.platforms
+    const gamesToSave = allGames
+      .map((game: any) => {
+        if (existingGameIds.some(existingGame => existingGame.id === game.id)) {
+          return null
+        } else {
+          return {
+            id: game.id,
+            name: game.name,
+            cover: game.cover?.url || null,
+            slug: game.slug,
+            platforms: game.platforms
+          }
         }
-      }
-    })
+      })
+      .filter(Boolean)
+
+    // const gamesToSave = allGames.filter((game: any) => {
+    //   return !existingGameIds.some(existingGame => existingGame.id === game.id)
+    // })
 
     return gamesToSave
   }
