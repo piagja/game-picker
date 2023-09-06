@@ -11,7 +11,10 @@ export class GameController {
 
       console.log('---- ANTES ----')
 
-      await prisma.game.createMany({ data: games })
+      // descomente o trecho abaixo para lançar os dados
+      // no banco de dados mysql
+
+      // await prisma.game.createMany({ data: games })
 
       console.log('---- DEPOIS ----')
 
