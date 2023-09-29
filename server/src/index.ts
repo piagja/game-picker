@@ -7,15 +7,15 @@ import { GameController } from './controllers/GameController'
 
 const app = express()
 const gameController = new GameController()
-const corsOptions = {
-  origin: '*',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  preflightContinue: false,
-  optionsSuccessStatus: 204
-}
+// const corsOptions = {
+//   origin: '*',
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   preflightContinue: false,
+//   optionsSuccessStatus: 204
+// }
 
+app.use(cors())
 app.use(express.json())
-app.use(cors(corsOptions))
 
 console.log(process.env.API_PORT)
 
