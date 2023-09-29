@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Response, Request } from 'express'
 import cors from 'cors'
 
 require('dotenv').config()
@@ -19,6 +19,12 @@ app.use(express.json())
 
 console.log(process.env.API_PORT)
 
+app.get('/', (req: Request, res: Response) => {
+  return res.json({
+    status: 'Ok',
+    message: 'Bem vindo!'
+  })
+})
 app.post('/games', gameController.fetchGames)
 
 app.listen(process.env.API_PORT, () => {
