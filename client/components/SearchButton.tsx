@@ -6,10 +6,9 @@ export const SearchButton = () => {
   const { setGames, searchTerm, setSearchTerm } = useGameContext()
 
   const handleData = async () => {
-    console.log(process.env.NEXT_PUBLIC_ENDPOINT)
     try {
       const response = await axios.post(
-        process.env.NEXT_PUBLIC_LOCALHOST as string,
+        process.env.NEXT_PUBLIC_ENDPOINT as string,
         [searchTerm]
       )
 
