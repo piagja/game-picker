@@ -4,12 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'www.freetogame.com',
-        port: ''
-      },
-      {
-        protocol: 'https',
-        hostname: 'media.rawg.io',
+        hostname: 'images.igdb.com',
         port: ''
       }
     ]
