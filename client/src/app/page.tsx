@@ -1,40 +1,30 @@
 'use client'
 
-import React, { useState } from 'react'
-import { SearchButton } from '../../components/SearchButton'
-
-import { GenresList, PlatformsList, RatingList, Button } from '../../components'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import logo from './assets/logo.png'
+
+import { SearchButton } from '../../components/SearchButton'
+import { useGameContext } from '../../context/GameContext'
+import { Input } from '../../components'
+import { GameCard } from '../../components/Card'
 
 const Home = () => {
-  const [selectedCategory, setSelectedCategory] = useState('')
-
-  const handleCategoryClick = (category: string) => {
-    if (selectedCategory === category) {
-      setSelectedCategory('')
-    } else {
-      setSelectedCategory(category)
-    }
-  }
-
-  const renderByCategory = () => {
-    switch (selectedCategory) {
-      case 'platforms':
-        return <PlatformsList />
-      case 'genres':
-        return <GenresList />
-      case 'rating':
-        return <RatingList />
-      default:
-        return null
-    }
-  }
+  const { searchTerm, setSearchTerm } = useGameContext()
 
   return (
-    <main className='flex items-center flex-col'>
-      <header className='flex flex-wrap justify-between px-10 w-full my-6'>
-        <div className='max-sm:w-auto'>Logo</div>
-        <nav className='max-sm:w-[100vw] max-sm:fixed max-sm:inset-x-0 max-sm:bottom-0 max-sm:z-50 max-sm:bg-slate-800 max-sm:h-20 text-slate-100 lg:w-auto'>
+    <main className='flex flex-col'>
+      <header className='flex items-start flex-wrap justify-between px-10 w-full my-6'>
+        <div className='max-sm:mx-auto max-sm:w-[80px] max-lg:w-[120px]'>
+          <Image
+            src={logo}
+            width={150}
+            height={150}
+            alt='Um logotipo da aplicação que parece duas folhas numa cor azul meio pálido que simulam asas'
+          />
+        </div>
+        <nav className='max-sm:w-[100vw] max-sm:sticky max-sm:inset-x-0 max-sm:bottom-0 max-sm:z-50 max-sm:bg-slate-800 max-sm:h-20 text-slate-100 lg:w-auto'>
           <ul className='flex justify-evenly items-center h-full list-none text-lg'>
             <Link href='#'>
               <li>Home</li>
@@ -48,46 +38,27 @@ const Home = () => {
           </ul>
         </nav>
       </header>
-      <div className='hero mb-6'>
+      <div className='flex flex-col'>
         <div className='text-center'>
-          <p className='font-bold tracking-widest text-3xl'>Search Your Game</p>
+          <p className='max-sm:text-xl mb-2 font-bold tracking-widest text-3xl'></p>
+          <Input
+            type='text'
+            name='search'
+            id='search'
+            onChange={e => setSearchTerm(e.target.value)}
+            value={searchTerm}
+            className='bg-gray-100 p-2 my-3 text-gray-800 rounded-md w-[32rem] max-lg:w-[400px] max-lg:h-[60px]'
+            placeholder='Pesquise pelo nome do jogo'
+          />
         </div>
+        <SearchButton />
       </div>
 
-      <section className='flex flex-col w-[100vw] items-center'>
-        <div className='flex justify-center flex-wrap'>
-          <Button
-            value='platforms'
-            className='bg-slate-800 h-12 w-32 flex-wrap rounded-lg hover:bg-slate-600 hover:text-slate-300'
-            onClick={() => handleCategoryClick('platforms')}
-          >
-            Plataformas
-          </Button>
-          <Button
-            value='genres'
-            className='bg-slate-800 mx-3 h-12 w-32 rounded-lg hover:bg-slate-600 hover:text-slate-300'
-            onClick={() => handleCategoryClick('genres')}
-          >
-            Gêneros/Temas
-          </Button>
-          <Button
-            value='rating'
-            className='bg-slate-800 h-12 w-32 rounded-lg hover:bg-slate-600 hover:text-slate-300'
-            onClick={() => handleCategoryClick('rating')}
-          >
-            Avaliação
-          </Button>
+      <div className='w-full'>
+        <div>
+          <GameCard />
         </div>
-      </section>
-
-      <div className='flex flex-wrap justify-center my-7 sm:w-[100%]'>
-        {renderByCategory()}
       </div>
-
-      <SearchButton />
-
-      {/* Stick choices */}
-      <div></div>
     </main>
   )
 }

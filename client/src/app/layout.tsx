@@ -1,7 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Jost } from 'next/font/google'
-import { FilterProvider } from '../../context/FilterContext'
+import { StrictMode } from 'react'
+import { GameProvider } from '../../context/GameContext'
 
 const jost = Jost({
   subsets: ['latin'],
@@ -19,7 +20,7 @@ export default function RootLayout ({
   children: React.ReactNode
 }) {
   return (
-    <FilterProvider>
+    <GameProvider>
       <html lang='en'>
         <body
           className={`
@@ -33,6 +34,6 @@ export default function RootLayout ({
           {children}
         </body>
       </html>
-    </FilterProvider>
+    </GameProvider>
   )
 }

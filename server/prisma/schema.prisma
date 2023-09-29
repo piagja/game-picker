@@ -8,12 +8,14 @@ datasource db {
 }
 
 model Game {
-  id                 Int     @id @default(autoincrement())
-  name               String  @db.Text
-  slug               String? @db.Text
+  id                 Int      @id @default(autoincrement())
+  name               String   @db.Text
+  slug               String?  @db.Text
   cover              Json?
   platforms          Json?
+  genre              Json?
   first_release_date String?
+  aggregated_rate    Decimal?
 
   @@map("games")
 }
