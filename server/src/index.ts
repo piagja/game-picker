@@ -25,7 +25,7 @@ app.get('/', (req: Request, res: Response) => {
     message: 'Bem vindo!'
   })
 })
-app.post('/games', gameController.fetchGames)
+app.post('/', gameController.fetchGames)
 
 app.listen(process.env.API_PORT, () => {
   console.info(`Server running on port ${process.env.API_PORT}`)
