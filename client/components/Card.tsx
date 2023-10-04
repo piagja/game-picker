@@ -19,10 +19,10 @@ export const GameCard = () => {
               }: IGame) => {
                 return (
                   <div
-                    className='flex flex-col mx-9 items-center justify-around my-6 w-[250px] bg-slate-950 rounded-lg transition max-sm:h-auto hover:ring-4 hover:scale-105'
+                    className='w-fit transition max-sm:h-auto hover:ring-4 hover:scale-105 flex flex-col items-center justify-around m-9 bg-slate-950 rounded-lg'
                     key={id}
                   >
-                    <div className='rounded-md '>
+                    <div className='rounded-md'>
                       {cover && cover.url ? (
                         <Image
                           src={`https:${cover.url.replace(

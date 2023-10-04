@@ -12,6 +12,9 @@ interface DispatchGame {
 
   searchTerm: string
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>
+
+  selectedOption: string
+  setSelectedOption: React.Dispatch<React.SetStateAction<string>>
 }
 
 export interface IGame extends DispatchGame {
@@ -36,10 +39,18 @@ export const useGameContext = () => {
 export const GameProvider = ({ children }: ChildrenNode) => {
   const [games, setGames] = useState<IGame[] | null>(null)
   const [searchTerm, setSearchTerm] = useState('')
+  const [selectedOption, setSelectedOption] = useState<string>('10')
 
   return (
     <GameContext.Provider
-      value={{ games, setGames, searchTerm, setSearchTerm }}
+      value={{
+        games,
+        setGames,
+        searchTerm,
+        setSearchTerm,
+        selectedOption,
+        setSelectedOption
+      }}
     >
       {children}
     </GameContext.Provider>

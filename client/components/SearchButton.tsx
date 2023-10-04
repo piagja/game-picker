@@ -3,13 +3,17 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { IGame, useGameContext } from '../context/GameContext'
 
 export const SearchButton = () => {
-  const { setGames, searchTerm, setSearchTerm } = useGameContext()
+  const { setGames, searchTerm, setSearchTerm, selectedOption } =
+    useGameContext()
 
   const handleData = async () => {
     try {
       const response = await axios.post(
         process.env.NEXT_PUBLIC_ENDPOINT as string,
-        [searchTerm]
+        {
+          searchTerm,
+          selectedOption
+        }
       )
 
       const games: IGame[] = response.data

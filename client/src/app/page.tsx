@@ -9,12 +9,18 @@ import { SearchButton } from '../../components/SearchButton'
 import { useGameContext } from '../../context/GameContext'
 import { Input } from '../../components'
 import { GameCard } from '../../components/Card'
+import { DropdownQty } from '../../components/DropdownQty'
 
 const Home = () => {
-  const { searchTerm, setSearchTerm } = useGameContext()
+  const { searchTerm, setSearchTerm, selectedOption, setSelectedOption } =
+    useGameContext()
+
+  const handleOptionChange = (option: string) => {
+    setSelectedOption(option)
+  }
 
   return (
-    <main className='flex flex-col'>
+    <main className=''>
       <header className='flex items-start flex-wrap justify-between px-10 w-full my-6'>
         <div className='max-sm:mx-auto max-sm:w-[80px] max-lg:w-[120px]'>
           <Image
@@ -40,17 +46,24 @@ const Home = () => {
       </header>
       <div className='flex flex-col'>
         <div className='text-center'>
-          <p className='max-sm:text-xl mb-2 font-bold tracking-widest text-3xl'></p>
+          <p className='max-sm:text-xl mb-2 font-bold tracking-widest text-3xl'>
+            Procure o seu jogo
+          </p>
           <Input
             type='text'
             name='search'
             id='search'
             onChange={e => setSearchTerm(e.target.value)}
             value={searchTerm}
-            className='bg-gray-100 p-2 my-3 text-gray-800 rounded-md w-[32rem] max-lg:w-[400px] max-lg:h-[60px]'
+            className='placeholder:pl-2 placeholder:text-xl bg-gray-100 my-3 text-gray-600 py-3 rounded-md w-[80vw]'
             placeholder='Pesquise pelo nome do jogo'
           />
         </div>
+        <DropdownQty
+          selectedOption={selectedOption}
+          onSelectOption={handleOptionChange}
+        />
+
         <SearchButton />
       </div>
 
