@@ -24,14 +24,16 @@ export class GameService {
   private baseURL: string = 'https://api.igdb.com/v4'
   private batchSize = 20
 
-  async fetchAllGames (searchTerm: string): Promise<Game[]> {
+  async fetchAllGames (
+    searchTerm: string,
+    selectedOption: string
+  ): Promise<Game[]> {
     try {
       const generateBaseField =
         'id,name,platforms.name,genres.name,cover.url,aggregated_rating'
       const applySearch = searchTerm ? `search "${searchTerm}";` : ''
 
       const applyFilters = `${generateBaseField}; ${applySearch}`
-
       const response: AxiosResponse<Game[]> = await axios.post(
         this.baseURL + '/games',
         null,
@@ -41,8 +43,7 @@ export class GameService {
             Authorization: 'Bearer ' + this.accessToken
           },
           params: {
-            fields: `${applyFilters}`,
-            limit: this.batchSize
+            fields: `${applyFilters} limit ${selectedOption};`
           }
         }
       )

@@ -7,10 +7,9 @@ const gameService = new GameService()
 export class GameController {
   async fetchGames (req: Request, res: Response) {
     try {
-      const searchTerm = req.body
+      const { searchTerm, selectedOption } = req.body
 
-      const games = await gameService.fetchAllGames(searchTerm)
-
+      const games = await gameService.fetchAllGames(searchTerm, selectedOption)
       // descomente o trecho abaixo para lançar os dados
       // no banco de dados mysql
 
