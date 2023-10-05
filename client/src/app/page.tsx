@@ -25,9 +25,7 @@ const Home = () => {
     setSelectedOption(option)
   }
 
-  const handleKeyPress = async (
-    event: React.KeyboardEvent<HTMLInputElement>
-  ) => {
+  const handleKeyPress = async (event: React.KeyboardEvent) => {
     try {
       if (event.code === 'Enter') {
         await handleApi(searchTerm, selectedOption, setGames, setSearchTerm)
@@ -73,7 +71,9 @@ const Home = () => {
             name='search'
             id='search'
             onChange={e => setSearchTerm(e.target.value)}
-            onKeyDown={e => handleKeyPress(e)}
+            onKeyDown={(e: React.KeyboardEvent) =>
+              handleKeyPress(e)
+            }
             value={searchTerm}
             className='placeholder:pl-2 placeholder:text-xl bg-gray-100 my-3 text-gray-600 py-3 rounded-md w-[80vw]'
             placeholder='Pesquise pelo nome do jogo'
