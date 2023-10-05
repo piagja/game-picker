@@ -10,13 +10,32 @@ import { useGameContext } from '../../context/GameContext'
 import { Input } from '../../components'
 import { GameCard } from '../../components/Card'
 import { DropdownQty } from '../../components/DropdownQty'
+import { handleApi } from '@/api'
 
 const Home = () => {
-  const { searchTerm, setSearchTerm, selectedOption, setSelectedOption } =
-    useGameContext()
+  const {
+    setGames,
+    searchTerm,
+    setSearchTerm,
+    selectedOption,
+    setSelectedOption
+  } = useGameContext()
 
   const handleOptionChange = (option: string) => {
     setSelectedOption(option)
+  }
+
+  const handleKeyPress = async (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    try {
+      if (event.code === 'Enter') {
+        await handleApi(searchTerm, selectedOption, setGames, setSearchTerm)
+      }
+    } catch (error) {
+      console.log(error)
+      if (error instanceof Error) throw new Error(error.message)
+    }
   }
 
   return (
@@ -54,6 +73,7 @@ const Home = () => {
             name='search'
             id='search'
             onChange={e => setSearchTerm(e.target.value)}
+            onKeyDown={e => handleKeyPress(e)}
             value={searchTerm}
             className='placeholder:pl-2 placeholder:text-xl bg-gray-100 my-3 text-gray-600 py-3 rounded-md w-[80vw]'
             placeholder='Pesquise pelo nome do jogo'
