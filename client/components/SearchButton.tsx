@@ -1,6 +1,6 @@
-import axios from 'axios'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { IGame, useGameContext } from '../context/GameContext'
+import { useGameContext } from '../context/GameContext'
+import { handleApi } from '@/api'
 
 export const SearchButton = () => {
   const { setGames, searchTerm, setSearchTerm, selectedOption } =
@@ -8,21 +8,7 @@ export const SearchButton = () => {
 
   const handleData = async () => {
     try {
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_ENDPOINT as string,
-        {
-          searchTerm,
-          selectedOption
-        }
-      )
-
-      const games: IGame[] = response.data
-
-      setGames(null)
-      setSearchTerm('')
-      setGames(games)
-
-      return games
+      await handleApi(searchTerm, selectedOption, setGames, setSearchTerm)
     } catch (error) {
       console.error('Erro ao enviar a requisição: ', error)
     }
