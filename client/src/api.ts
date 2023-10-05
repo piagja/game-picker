@@ -16,7 +16,7 @@ export async function handleApi (
       }
     )
 
-    const games: IGame = response.data
+    const games: IGame[] = response.data
 
     setGames(null)
     setSearchTerm('')
