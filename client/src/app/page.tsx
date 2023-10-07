@@ -18,8 +18,12 @@ const Home = () => {
     searchTerm,
     setSearchTerm,
     selectedOption,
-    setSelectedOption
+    setSelectedOption,
+    setIsLoading,
+    isLoading
   } = useGameContext()
+
+  console.log(isLoading)
 
   const handleOptionChange = (option: string) => {
     setSelectedOption(option)
@@ -28,7 +32,13 @@ const Home = () => {
   const handleKeyPress = async (event: React.KeyboardEvent) => {
     try {
       if (event.code === 'Enter') {
-        await handleApi(searchTerm, selectedOption, setGames, setSearchTerm)
+        await handleApi(
+          searchTerm,
+          selectedOption,
+          setGames,
+          setSearchTerm,
+          setIsLoading
+        )
       }
     } catch (error) {
       console.log(error)
@@ -37,7 +47,7 @@ const Home = () => {
   }
 
   return (
-    <main className=''>
+    <main>
       <header className='flex items-start flex-wrap justify-between px-10 w-full my-6'>
         <div className='max-sm:mx-auto max-sm:w-[80px] max-lg:w-[120px]'>
           <Image
@@ -71,9 +81,7 @@ const Home = () => {
             name='search'
             id='search'
             onChange={e => setSearchTerm(e.target.value)}
-            onKeyDown={(e: React.KeyboardEvent) =>
-              handleKeyPress(e)
-            }
+            onKeyDown={(e: React.KeyboardEvent) => handleKeyPress(e)}
             value={searchTerm}
             className='placeholder:pl-2 placeholder:text-xl bg-gray-100 my-3 text-gray-600 py-3 rounded-md w-[80vw]'
             placeholder='Pesquise pelo nome do jogo'
@@ -87,11 +95,15 @@ const Home = () => {
         <SearchButton />
       </div>
 
-      <div className='w-full'>
-        <div>
-          <GameCard />
+      {isLoading ? (
+        <div className='animate-spin m-auto mt-20 rounded-full h-24 w-24 border-t-sky-400 border-t-2'></div>
+      ) : (
+        <div className='w-full'>
+          <div>
+            <GameCard />
+          </div>
         </div>
-      </div>
+      )}
     </main>
   )
 }

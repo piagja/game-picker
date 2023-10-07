@@ -15,6 +15,9 @@ interface DispatchGame {
 
   selectedOption: string
   setSelectedOption: React.Dispatch<React.SetStateAction<string>>
+
+  isLoading: boolean
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface IGame extends DispatchGame {
@@ -40,6 +43,7 @@ export const GameProvider = ({ children }: ChildrenNode) => {
   const [games, setGames] = useState<IGame[] | null>(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedOption, setSelectedOption] = useState<string>('10')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   return (
     <GameContext.Provider
@@ -49,7 +53,9 @@ export const GameProvider = ({ children }: ChildrenNode) => {
         searchTerm,
         setSearchTerm,
         selectedOption,
-        setSelectedOption
+        setSelectedOption,
+        isLoading,
+        setIsLoading
       }}
     >
       {children}
