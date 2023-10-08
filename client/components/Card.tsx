@@ -19,7 +19,7 @@ export const GameCard = () => {
               }: IGame) => {
                 return (
                   <div
-                    className='w-fit transition max-sm:h-auto hover:ring-4 hover:scale-105 flex flex-col items-center justify-around m-9 bg-slate-950 rounded-lg'
+                    className='max-sm:h-auto hover:ring-4 hover:scale-105 transition w-fit flex-col items-center justify-around m-9 bg-slate-950 rounded-lg'
                     key={id}
                   >
                     <div className='rounded-md'>
