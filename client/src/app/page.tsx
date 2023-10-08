@@ -57,7 +57,7 @@ const Home = () => {
             alt='Um logotipo da aplicação que parece duas folhas numa cor azul meio pálido que simulam asas'
           />
         </div>
-        <nav className='max-sm:w-[100vw] max-sm:sticky max-sm:inset-x-0 max-sm:bottom-0 max-sm:z-50 max-sm:bg-slate-800 max-sm:h-20 text-slate-100 lg:w-auto'>
+        <nav className='max-sm:fixed max-sm:inset-x-0 max-sm:bottom-0 max-sm:z-50 max-sm:bg-slate-800 max-sm:h-20 max-md:rounded-t-sm text-slate-100 lg:w-auto'>
           <ul className='flex justify-evenly items-center h-full list-none text-lg'>
             <Link href='#'>
               <li>Home</li>
@@ -98,7 +98,7 @@ const Home = () => {
       {isLoading ? (
         <div className='animate-spin m-auto mt-20 rounded-full h-24 w-24 border-t-sky-400 border-t-2'></div>
       ) : (
-        <div className='w-full'>
+        <div className='w-full max-md:mb-20'>
           <div>
             <GameCard />
           </div>
