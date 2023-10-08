@@ -21,7 +21,7 @@ export default function RootLayout ({
 }) {
   return (
     <GameProvider>
-      <html lang='en'>
+      <html lang='en' className='scroll-smooth'>
         <body
           className={`
          ${jost.className} 

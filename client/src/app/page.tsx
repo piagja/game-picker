@@ -11,6 +11,7 @@ import { Input } from '../../components'
 import { GameCard } from '../../components/Card'
 import { DropdownQty } from '../../components/DropdownQty'
 import { handleApi } from '@/api'
+import { AiOutlineArrowUp } from 'react-icons/ai'
 
 const Home = () => {
   const {
@@ -22,8 +23,6 @@ const Home = () => {
     setIsLoading,
     isLoading
   } = useGameContext()
-
-  console.log(isLoading)
 
   const handleOptionChange = (option: string) => {
     setSelectedOption(option)
@@ -48,7 +47,10 @@ const Home = () => {
 
   return (
     <main>
-      <header className='flex items-start flex-wrap justify-between px-10 w-full my-6'>
+      <header
+        id='header'
+        className='flex items-start flex-wrap justify-between px-10 w-full my-6'
+      >
         <div className='max-sm:mx-auto max-sm:w-[80px] max-lg:w-[120px]'>
           <Image
             src={logo}
@@ -70,6 +72,12 @@ const Home = () => {
             </Link>
           </ul>
         </nav>
+        <Link
+          href='#header'
+          className='lg:bottom-10 bottom-[6rem] right-2 z-50 animate-bounce fixed h-10 w-10 text-slate-400 bg-slate-800 rounded-full flex items-center justify-center flex-wrap'
+        >
+          <AiOutlineArrowUp size={30} />
+        </Link>
       </header>
       <div className='flex flex-col'>
         <div className='text-center'>
