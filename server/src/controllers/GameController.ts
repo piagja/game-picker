@@ -1,6 +1,5 @@
 import { Request, Response } from 'express'
 import { GameService } from '../services/GameService'
-import { prisma } from '../../prisma/prisma'
 
 const gameService = new GameService()
 
